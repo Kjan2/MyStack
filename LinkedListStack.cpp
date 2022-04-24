@@ -197,7 +197,7 @@ bool LinkedList::isEmpty() const
 
 size_t LinkedList::size() const
 {
-    if (!_head)
+    if (!_head)   
     {
         return 0;
     }

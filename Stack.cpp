@@ -3,8 +3,8 @@
 #include "VectorStack.h"
 #include "StackImplementation.h"
 #include <stdexcept>
-#include <stdio.h>
-
+#include <iostream>
+#include <utility>
 Stack::Stack(StackContainer container)
     : _containerType(container)
 {
@@ -65,7 +65,6 @@ Stack::Stack(const Stack& copyStack)
 
 Stack& Stack::operator=(const Stack& copyStack)
 {
-    // TODO: вставьте здесь оператор return
     switch (copyStack._containerType)
     {
     case StackContainer::List: {
@@ -85,27 +84,49 @@ Stack& Stack::operator=(const Stack& copyStack)
 
 }
 
-/*Stack& Stack::operator=(Stack&& moveStack) noexcept
+Stack::Stack(Stack&& moveStack) noexcept
 {
-    // TODO: вставьте здесь оператор return
     switch (moveStack._containerType)
     {
     case StackContainer::List: {
-        _pimpl = static_cast<IStackImplementation*>(new LinkedList());    // конкретизируйте под ваши конструкторы, если надо
+        this->_pimpl = moveStack._pimpl;
+        moveStack._pimpl = nullptr;
         break;
     }
     case StackContainer::Vector: {
-        *(static_cast<Vector*>(this->_pimpl)) = static_cast<Vector&&>(*(static_cast<Vector*>(moveStack._pimpl)));    // конкретизируйте под ваши конструкторы, если надо
+        this->_pimpl = moveStack._pimpl;
+        moveStack._pimpl = nullptr;
+
+        break;
+    }
+
+    default: 
+        throw std::runtime_error("Неизвестный тип контейнера"); 
+    }
+}
+
+Stack& Stack::operator=(Stack&& moveStack) noexcept
+{
+    switch (moveStack._containerType)
+    {
+    case StackContainer::List: {
+        this->_pimpl = moveStack._pimpl;
+        moveStack._pimpl = nullptr;
+        return *this;
+        break;
+    }
+    case StackContainer::Vector: {
+        this->_pimpl = moveStack._pimpl;
+        moveStack._pimpl = nullptr;
         return *this;
         break;
     }
 
-    default: {
+    default: 
         throw std::runtime_error("Неизвестный тип контейнера");
-    }
-    }
+    }    
 }
-*/
+
 
 Stack::~Stack()
 {
