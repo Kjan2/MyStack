@@ -158,6 +158,12 @@ void LinkedList::pop()
     {
         curr = curr->next;
     }
+
+    if(curr == _head && !curr->next)
+    {
+        _head = nullptr;
+        return;
+    }
     
     delete curr->next;
 
