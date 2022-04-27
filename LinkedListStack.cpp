@@ -198,7 +198,7 @@ const Value& LinkedList::top() const
 
 bool LinkedList::isEmpty() const
 {
-    return static_cast<bool>(_head);
+    return !_head;
 }
 
 size_t LinkedList::size() const

@@ -420,7 +420,7 @@ const Value& Vector::top() const
 
 bool Vector::isEmpty() const
 {
-    return (bool) _size;
+    return !_size;
 }
 
 
