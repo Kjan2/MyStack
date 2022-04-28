@@ -4,7 +4,7 @@
 LinkedList::LinkedList(const LinkedList& copyList)
 {
     Node* node = copyList._head;
-    this->_head = copyList._head;
+
 
     while (node)
     {
