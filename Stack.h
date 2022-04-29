@@ -43,12 +43,11 @@ public:
     bool isEmpty() const;
     // размер 
     size_t size() const;
-StackContainer _containerType;
 
 private:
     // указатель на имплементацию (уровень реализации)
     IStackImplementation* _pimpl = nullptr;
     // тип контейнера, наверняка понадобится
-    //StackContainer _containerType;
+    StackContainer _containerType;
 };
 
