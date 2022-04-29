@@ -3,8 +3,14 @@
 
 LinkedList::LinkedList(const LinkedList& copyList)
 {
-    Node* node = copyList._head;
+    this->_head = nullptr;
 
+    if (copyList._head == nullptr)
+    {
+        return;
+    }
+
+    Node* node = copyList._head;
 
     while (node)
     {
@@ -30,43 +36,14 @@ LinkedList& LinkedList::operator=(const LinkedList& copyList)
 
 LinkedList::LinkedList(LinkedList&& moveList)
 {
-    Node* node = moveList._head;
     this->_head = moveList._head;
-
-    while (node)
-    {
-        this->push(node->value);
-        node = node->next;
-    }
-
-    Node* nodeDelete = moveList._head;
-    while(nodeDelete)
-    {
-        Node* next = nodeDelete->next;
-        delete nodeDelete;
-        nodeDelete = next;
-    }
     moveList._head = nullptr;
 }
 
 LinkedList& LinkedList::operator=(LinkedList&& moveList)
 {
-    Node* node = moveList._head;
+
     this->_head = moveList._head;
-
-    while (node)
-    {
-        this->push(node->value);
-        node = node->next;
-    }
-
-    Node* nodeDelete = moveList._head;
-    while(nodeDelete)
-    {
-        Node* next = nodeDelete->next;
-        delete nodeDelete;
-        nodeDelete = next;
-    }
     moveList._head = nullptr;
 
     return *this;
@@ -129,9 +106,10 @@ const LinkedList::Node* LinkedList::Iterator::operator->() const
 
 void LinkedList::push(const Value& value)
 {
-    if (!_head)
+    if (_head == nullptr)
     {
         _head = new Node(value, nullptr);
+        return;
     }
 
     Node* node = new Node(value, nullptr);
@@ -159,7 +137,7 @@ void LinkedList::pop()
         curr = curr->next;
     }
 
-    if(curr == _head && !curr->next)
+    if((curr == _head) && (curr->next == nullptr))
     {
         _head = nullptr;
         return;
@@ -188,6 +166,7 @@ void LinkedList::print()
 
 const Value& LinkedList::top() const
 {
+    
     Node* node = _head;
     while(node->next)
     {
@@ -208,7 +187,7 @@ size_t LinkedList::size() const
         return 0;
     }
 
-    int i = 0;
+    int i = 1;
     Node* node = _head;
     while(node->next)
     {
