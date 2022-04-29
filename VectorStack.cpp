@@ -47,6 +47,7 @@ Vector& Vector::operator=(const Vector& other)
     this->_size = other._size;
     this->_capacity = other._capacity;
     this->_multiplicativeCoef = other._multiplicativeCoef;
+    return *this;
 }
 
 Vector::Vector(Vector&& other) noexcept

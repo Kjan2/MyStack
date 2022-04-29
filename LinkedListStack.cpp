@@ -23,7 +23,20 @@ LinkedList::LinkedList(const LinkedList& copyList)
 
 LinkedList& LinkedList::operator=(const LinkedList& copyList)
 {
+    this->_head = nullptr;
 
+    if (copyList._head == nullptr)
+    {
+        return *this;
+    }
+
+    Node* node = copyList._head;
+
+    while (node)
+    {
+        this->push(node->value);
+        node = node->next;
+    } 
     return *this;
 }
 

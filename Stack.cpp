@@ -51,11 +51,13 @@ Stack::Stack(const Stack& copyStack)
     switch (copyStack._containerType)
     {
     case StackContainer::List: {
+        delete _pimpl;
         _pimpl = static_cast<IStackImplementation*>(new LinkedList(*(static_cast<LinkedList*>(copyStack._pimpl))));
         break;
     }
     case StackContainer::Vector: {
-        this->_pimpl = static_cast<IStackImplementation*>(new Vector(*(static_cast<Vector*>(copyStack._pimpl))));
+        delete _pimpl;
+       _pimpl = static_cast<IStackImplementation*>(new Vector(*(static_cast<Vector*>(copyStack._pimpl))));
         break;
     }
     default:
@@ -75,7 +77,8 @@ Stack& Stack::operator=(const Stack& copyStack)
     }
 
     case StackContainer::Vector: {
-        *(static_cast<Vector*>(this->_pimpl)) = *(static_cast<Vector*>(copyStack._pimpl));
+        delete _pimpl;
+        _pimpl = static_cast<IStackImplementation*>(new Vector(*(static_cast<Vector*>(copyStack._pimpl))));
         return *this;
         break;
     }
