@@ -48,16 +48,20 @@ Stack::Stack(const ValueType* valueArray, const size_t arraySize, StackContainer
 
 Stack::Stack(const Stack& copyStack)
 {
+   
     switch (copyStack._containerType)
     {
     case StackContainer::List: {
+
         delete _pimpl;
         _pimpl = static_cast<IStackImplementation*>(new LinkedList(*(static_cast<LinkedList*>(copyStack._pimpl))));
+        this->_containerType = StackContainer::List;
         break;
     }
     case StackContainer::Vector: {
         delete _pimpl;
        _pimpl = static_cast<IStackImplementation*>(new Vector(*(static_cast<Vector*>(copyStack._pimpl))));
+        this->_containerType = StackContainer::Vector;
         break;
     }
     default:
@@ -70,8 +74,13 @@ Stack& Stack::operator=(const Stack& copyStack)
     switch (copyStack._containerType)
     {
     case StackContainer::List: {
+        if (this == &copyStack)
+        {
+            return *this;
+        }
         delete _pimpl;
         _pimpl = static_cast<IStackImplementation*>(new LinkedList(*(static_cast<LinkedList*>(copyStack._pimpl))));
+        this->_containerType = StackContainer::List;
         return *this;
         break;
     }
@@ -79,6 +88,7 @@ Stack& Stack::operator=(const Stack& copyStack)
     case StackContainer::Vector: {
         delete _pimpl;
         _pimpl = static_cast<IStackImplementation*>(new Vector(*(static_cast<Vector*>(copyStack._pimpl))));
+        this->_containerType = StackContainer::Vector;
         return *this;
         break;
     }
