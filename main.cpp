@@ -2,27 +2,26 @@
 #include <iostream>
 #include <utility>
 #include <typeinfo>
-Stack& shit()
-{
-    Stack shit(StackContainer::Vector);
-    return shit;
-}
+
 
 int main()
 {
-    Stack test(StackContainer::List);
-    test.push(1.0);
-    test.push(2.0);
 
+
+    double array[] = {1., 2., 3., 4., 5., 6., 7};
+    Stack test (array, 7, StackContainer::List);
+    std::cout << (int)test._containerType;
+    //Stack test2(StackContainer::List);
     Stack test2(test);
-    Stack test3(StackContainer::Vector);
-    test3 = std::move(test2);
-    std::cout << test2.top() << " " << test2.size() << std::endl;
-    test2.pop();
-    std::cout << test2.top() << " " << test2.size() << std::endl;
-    std::cout << typeid(&test2).name() << std::endl;
-    //test2.pop();
-    //std::cout << test2.top();
+    test2.push(1.);
+    test2.push(2.);
+    test2.push(3.);
+    for (int i = 0; i < 7; i++)
+    {
+        std::cout << test2.top() << std::endl;
+        test2.pop();
+    }
+
     return 0;
 }
 

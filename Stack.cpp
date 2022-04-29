@@ -25,7 +25,7 @@ Stack::Stack(StackContainer container)
     }
 }
 
-Stack::Stack(const ValueType* valueArray, const size_t arraySize, StackContainer container)
+Stack::Stack(const ValueType* valueArray, const size_t arraySize, StackContainer container) : _containerType(container)
 {
     switch (container)
     {
@@ -89,6 +89,10 @@ Stack& Stack::operator=(const Stack& copyStack)
         }
 
         case StackContainer::Vector: {
+            if (this == &copyStack)
+            {
+                return *this; 
+            }
             delete this->_pimpl;
             _pimpl = static_cast<IStackImplementation*>(new Vector(*(static_cast<Vector*>(copyStack._pimpl))));
             this->_containerType = StackContainer::Vector;
@@ -98,7 +102,6 @@ Stack& Stack::operator=(const Stack& copyStack)
         default:
             throw std::runtime_error("Неизвестный тип контейнера");
     }
-
 }
 
 Stack::Stack(Stack&& moveStack) noexcept
@@ -106,14 +109,12 @@ Stack::Stack(Stack&& moveStack) noexcept
     switch (moveStack._containerType)
     {
         case StackContainer::List: {
-            delete this->_pimpl;
             this->_pimpl = moveStack._pimpl;
             moveStack._pimpl = nullptr;
             this->_containerType = StackContainer::List;
             break;
         }
         case StackContainer::Vector: {
-            delete this->_pimpl;
             this->_pimpl = moveStack._pimpl;
             moveStack._pimpl = nullptr;
             this->_containerType = StackContainer::Vector;
@@ -130,7 +131,11 @@ Stack& Stack::operator=(Stack&& moveStack) noexcept
     switch (moveStack._containerType)
     {
         case StackContainer::List: 
-        {
+        {   
+            if (this == &moveStack)
+            {
+                return *this;
+            }
             delete this->_pimpl;
             this->_pimpl = moveStack._pimpl;
             moveStack._pimpl = nullptr;
@@ -140,6 +145,10 @@ Stack& Stack::operator=(Stack&& moveStack) noexcept
         }
         case StackContainer::Vector: 
         {
+            if (this == &moveStack)
+            {
+                return *this;
+            }
             delete this->_pimpl;
             this->_pimpl = moveStack._pimpl;
             moveStack._pimpl = nullptr;

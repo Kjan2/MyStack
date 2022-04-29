@@ -4,7 +4,7 @@
 
 LinkedList::LinkedList(const LinkedList& copyList)
 {
-    this->_head = nullptr;
+    //this->_head = nullptr;
 
     if (copyList._head == nullptr)
     {

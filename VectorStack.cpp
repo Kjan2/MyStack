@@ -98,7 +98,7 @@ void Vector::push(const Value& value)
         _capacity *= _multiplicativeCoef;
         Value* newData = new Value[_capacity];
         
-        for (size_t i = 0; i < _size - 1; i++)
+        for (size_t i = 0; i < (_size - 1); i++)
         {
             newData[i] = _data[i];
         }
