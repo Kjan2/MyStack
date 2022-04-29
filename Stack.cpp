@@ -68,6 +68,7 @@ Stack& Stack::operator=(const Stack& copyStack)
     switch (copyStack._containerType)
     {
     case StackContainer::List: {
+        delete _pimpl;
         _pimpl = static_cast<IStackImplementation*>(new LinkedList(*(static_cast<LinkedList*>(copyStack._pimpl))));
         return *this;
         break;
@@ -101,7 +102,7 @@ Stack::Stack(Stack&& moveStack) noexcept
     }
 
     default: 
-        throw std::runtime_error("Неизвестный тип контейнера"); 
+                                 {}//throw std::runtime_error("Неизвестный тип контейнера"); 
     }
 }
 
@@ -122,15 +123,15 @@ Stack& Stack::operator=(Stack&& moveStack) noexcept
         break;
     }
 
-    default: 
-        throw std::runtime_error("Неизвестный тип контейнера");
+    default: {}
+       // throw std::runtime_error("Неизвестный тип контейнера");
     }    
 }
 
 
 Stack::~Stack()
 {
-    delete _pimpl;        // композиция!
+    delete _pimpl; 
 }
 
 void Stack::push(const ValueType& value)

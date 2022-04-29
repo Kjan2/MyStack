@@ -1,6 +1,7 @@
 #include "LinkedListStack.h"
 #include <iostream>
 
+
 LinkedList::LinkedList(const LinkedList& copyList)
 {
     this->_head = nullptr;
@@ -22,14 +23,6 @@ LinkedList::LinkedList(const LinkedList& copyList)
 
 LinkedList& LinkedList::operator=(const LinkedList& copyList)
 {
-    Node* node = copyList._head;
-    this->_head = copyList._head;
-
-    while (node)
-    {
-        this->push(node->value);
-        node = node->next;
-    } 
 
     return *this;
 }
@@ -53,7 +46,7 @@ LinkedList& LinkedList::operator=(LinkedList&& moveList)
 LinkedList::~LinkedList()
 {
     Node* nodeDelete = _head;
-    while(nodeDelete)
+    while(nodeDelete != nullptr)
     {
         Node* next = nodeDelete->next;
         delete nodeDelete;

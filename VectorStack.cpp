@@ -8,9 +8,7 @@ Vector::Vector(const Value* rawArray, const size_t size, float coef)
 
     for (size_t i = 0; i < size; i++)
     {
-        *_data = *rawArray;
-        _data++;
-        rawArray++;
+        _data[i] = rawArray[i];
     }
 
     _size = size;
