@@ -172,6 +172,10 @@ void LinkedList::print()
 
 const Value& LinkedList::top() const
 {
+    if (!_head)
+    {
+        throw size();
+    }
     
     Node* node = _head;
     while(node->next)
