@@ -187,7 +187,12 @@ const Value& LinkedList::top() const
 
 bool LinkedList::isEmpty() const
 {
-    return !_head;
+    if(_head == nullptr)
+    {
+        return 1;
+    }
+
+    return 0;
 }
 
 size_t LinkedList::size() const

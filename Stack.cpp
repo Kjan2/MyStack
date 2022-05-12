@@ -122,7 +122,9 @@ Stack::Stack(Stack&& moveStack) noexcept
         }
 
         default: 
-                                     {}//throw std::runtime_error("Неизвестный тип контейнера"); 
+        {
+            return *this;
+        }
     }
 }
 
@@ -159,7 +161,7 @@ Stack& Stack::operator=(Stack&& moveStack) noexcept
 
         default:
         {
-          //throw std::runtime_error("Неизвестный тип контейнера");
+          return 0;
         }
     }    
 }
