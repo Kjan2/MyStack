@@ -130,24 +130,24 @@ void LinkedList::push(const Value& value)
 
 void LinkedList::pop()
 {
-    if (!_head)
+    if (_head == nullptr)
     {
         return;
     }
     
 
     Node* curr = _head;
-
+    if((curr == _head) && (curr->next == nullptr))
+    {
+        delete _head;
+        _head = nullptr;
+        return;
+    }
     while(curr->next->next)
     {
         curr = curr->next;
     }
 
-    if((curr == _head) && (curr->next == nullptr))
-    {
-        _head = nullptr;
-        return;
-    }
     
     delete curr->next;
 
@@ -172,6 +172,10 @@ void LinkedList::print()
 
 const Value& LinkedList::top() const
 {
+    if (!_head)
+    {
+        throw size();
+    }
     
     Node* node = _head;
     while(node->next)
