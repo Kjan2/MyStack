@@ -4,7 +4,7 @@
 #include "StackImplementation.h"
 #include <stdexcept>
 #include <iostream>
-#include <utility>
+
 Stack::Stack(StackContainer container)
     : _containerType(container)
 {
@@ -25,7 +25,8 @@ Stack::Stack(StackContainer container)
     }
 }
 
-Stack::Stack(const ValueType* valueArray, const size_t arraySize, StackContainer container) : _containerType(container)
+Stack::Stack(const ValueType* valueArray, const size_t arraySize, StackContainer container) 
+    : _containerType(container)
 {
     switch (container)
     {
@@ -123,7 +124,6 @@ Stack::Stack(Stack&& moveStack) noexcept
 
         default: 
         {
-            return *this;
         }
     }
 }
@@ -161,7 +161,7 @@ Stack& Stack::operator=(Stack&& moveStack) noexcept
 
         default:
         {
-          return 0;
+            return *this;
         }
     }    
 }

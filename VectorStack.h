@@ -143,7 +143,7 @@ public:
 private:
     Value* _data = nullptr;
     size_t _size = 0;
-    size_t _capacity = 1;
+    size_t _capacity = 0;
     float _multiplicativeCoef = 2.0f;
 };
 

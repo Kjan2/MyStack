@@ -132,17 +132,19 @@ void LinkedList::pop()
 {
     if (_head == nullptr)
     {
-        return;
+        throw size();
     }
     
 
     Node* curr = _head;
+
     if((curr == _head) && (curr->next == nullptr))
     {
         delete _head;
         _head = nullptr;
         return;
     }
+    
     while(curr->next->next)
     {
         curr = curr->next;
@@ -203,6 +205,7 @@ size_t LinkedList::size() const
     }
 
     int i = 1;
+
     Node* node = _head;
     while(node->next)
     {
