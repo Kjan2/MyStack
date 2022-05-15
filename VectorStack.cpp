@@ -405,6 +405,7 @@ void Vector::popFront()
     {
         _data[i] = _data[i + 1];
     }
+    
     _size--;
 }
 

@@ -22,6 +22,26 @@ public:
 
     ~Vector();
 
+    class Iterator
+    {
+    public:
+        explicit Iterator(Value* ptr);
+        Value& operator*();
+        const Value& operator*() const;
+        Value* operator->();
+        const Value* operator->() const;
+        Iterator operator++();
+        Iterator operator++(int);
+        bool operator==(const Iterator& other) const;
+        bool operator!=(const Iterator& other) const;
+    private:
+        Value* _ptr;
+
+    };
+
+    Iterator begin();
+    Iterator end();
+
     /*!
         \brief Add element to the end of vector
 
